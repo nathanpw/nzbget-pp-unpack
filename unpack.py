@@ -24,7 +24,19 @@
 # minFileSize
 #
 # This is the minimum size (in MiB) to be be considered as archive file to unpack.
-#minSize=200
+#minSize=20
+
+
+# unrarCmd
+#
+# Full path to unrar executable.
+#unrarCmd=unrar
+
+
+# sevenZipCmd
+#
+# Full path to 7-Zip executable.
+#sevenZipCmd=7z
 
 ### NZBGET POST-PROCESSING SCRIPT                                          ###
 ##############################################################################
@@ -122,11 +134,11 @@ if os.environ.has_key('NZBOP_SCRIPTDIR') and not os.environ['NZBOP_VERSION'][0:5
                             part_r = re.search(r"part(\d+)$",fileName, re.IGNORECASE)
                             if (part_r is not None) and (int(part_r.group(1)) != 1):
                                 continue
-                            proc = subprocess.Popen(["unrar", "x", "-y", "-o+", "-p-", os.path.normpath(filePath), os.path.normpath(dirpath)], stdout=subprocess.PIPE)
+                            proc = subprocess.Popen([os.environ['NZBPO_UNRARCMD'], "x", "-y", "-o+", "-p-", os.path.normpath(filePath), os.path.normpath(dirpath)], stdout=subprocess.PIPE)
                         elif fileExtension == ".zip":
                             proc = subprocess.Popen(["unzip", "-o", os.path.normpath(filePath), "-d" , os.path.normpath(dirpath)], stdout=subprocess.PIPE)
                         elif fileExtension == ".7z":
-                            proc = subprocess.Popen(["7z", "x", "-y", os.path.normpath(filePath), '-o' + os.path.normpath(dirpath)], stdout=subprocess.PIPE)
+                            proc = subprocess.Popen([os.environ['NZBPO_SEVENZIPCMD'], "x", "-y", os.path.normpath(filePath), '-o' + os.path.normpath(dirpath)], stdout=subprocess.PIPE)
                         ok = False
                         rar_files = []
                         for line in iter(proc.stdout.readline,''):
