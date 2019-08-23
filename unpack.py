@@ -29,13 +29,13 @@
 
 # unrarCmd
 #
-# Full path to unrar executable.
+# Full path to unrar executable (unrar).
 #unrarCmd=${AppDir}/unrar
 
 
 # sevenZipCmd
 #
-# Full path to 7-Zip executable.
+# Full path to 7-Zip executable (7z, 7za).
 #sevenZipCmd=/usr/bin/7za
 
 ### NZBGET POST-PROCESSING SCRIPT                                          ###
@@ -48,7 +48,7 @@ import re
 import time
 
 def is_small(filePath, inputName, minSize):
-    # minSize in bytes
+    # convert minSize to MiB
     SIZE_CUTOFF = int(minSize) * 1024 * 1024
     # Ignore 'subs' in files unless 'subs' in Torrent Name
     return (not 'subs' in filePath.lower()) and (not 'subs' in inputName) and (os.path.getsize(filePath) < SIZE_CUTOFF)
