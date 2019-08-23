@@ -21,7 +21,7 @@
 #unpackExtensions=.rar,.zip,.7z
 
 
-# minFileSize
+# minSize
 #
 # This is the minimum size (in MiB) to be be considered as archive file to unpack.
 #minSize=20
