@@ -24,19 +24,19 @@
 # minSize
 #
 # This is the minimum size (in MiB) to be be considered as archive file to unpack.
-#minSize=20
+#minSize=10
 
 
 # unrarCmd
 #
 # Full path to unrar executable.
-#unrarCmd=unrar
+#unrarCmd=${AppDir}/unrar
 
 
 # sevenZipCmd
 #
 # Full path to 7-Zip executable.
-#sevenZipCmd=7z
+#sevenZipCmd=/usr/bin/7za
 
 ### NZBGET POST-PROCESSING SCRIPT                                          ###
 ##############################################################################
@@ -48,7 +48,7 @@ import re
 import time
 
 def is_small(filePath, inputName, minSize):
-    # 200 MB in bytes
+    # minSize in bytes
     SIZE_CUTOFF = int(minSize) * 1024 * 1024
     # Ignore 'subs' in files unless 'subs' in Torrent Name
     return (not 'subs' in filePath.lower()) and (not 'subs' in inputName) and (os.path.getsize(filePath) < SIZE_CUTOFF)
